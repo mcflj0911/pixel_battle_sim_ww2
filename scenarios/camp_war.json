@@ -1,0 +1,7683 @@
+{
+  "name": "Camp War",
+  "subtitle": "Two camps, one front",
+  "description": "The Allied Forces (olive-drab riflemen, jeeps, Mustangs and PT boats; blue markings) on the left and the Axis Forces (field-grey grenadiers, sidecar bikes, Stukas and E-boats; red markings) on the right. Each camp is ringed by a sandbag perimeter with four watchtowers, an anti-tank ditch crossed by one checkpoint, tank traps in front of the gate and a headquarters bunker in the middle. Troops muster in the camp and counter-attack when the enemy comes near. Field guns and howitzers roll out with the army and shell the enemy's perimeter, checkpoint, towers and tank traps; tanks and halftracks breach what is left. A side that gathers a strong force in the middle pushes on the enemy's headquarters. Nobody wins: the battle goes on for as long as the program runs. Trenches and old shell holes scar the middle of the field and give men cover.",
+  "seed": 1,
+  "map": {
+    "width": 6000,
+    "height": 900,
+    "shore": 620
+  },
+  "sides": {
+    "allies": {
+      "name": "Allied Forces",
+      "color": [
+        70,
+        120,
+        220
+      ],
+      "goal": [
+        3000.0,
+        360
+      ],
+      "emblem": [
+        "...#...",
+        "..###..",
+        "#######",
+        ".#####.",
+        ".##.##.",
+        ".#...#."
+      ],
+      "style": "allies"
+    },
+    "axis": {
+      "name": "Axis Forces",
+      "color": [
+        210,
+        80,
+        70
+      ],
+      "goal": [
+        3000.0,
+        360
+      ],
+      "emblem": [
+        "..###..",
+        "..###..",
+        "#######",
+        "#######",
+        "..###..",
+        "..###.."
+      ],
+      "style": "axis"
+    }
+  },
+  "unit_types": {
+    "rifleman": {
+      "name": "Rifleman",
+      "sprite": "foot",
+      "hp": 110,
+      "attack": 12,
+      "defence": 8,
+      "speed": 26,
+      "reach": 14,
+      "sight": 200,
+      "cooldown": 1.4,
+      "rout_at": 20
+    },
+    "machine_gunner": {
+      "name": "Machine gunner",
+      "sprite": "archer",
+      "hp": 60,
+      "attack": 9,
+      "defence": 3,
+      "speed": 24,
+      "reach": 160,
+      "sight": 250,
+      "cooldown": 2.0,
+      "rout_at": 20,
+      "volley": true,
+      "round": "bullet"
+    },
+    "flamethrower": {
+      "name": "Flamethrower",
+      "sprite": "flamer",
+      "hp": 60,
+      "attack": 11,
+      "defence": 3,
+      "speed": 24,
+      "reach": 140,
+      "sight": 240,
+      "cooldown": 2.5,
+      "rout_at": 20,
+      "volley": true,
+      "fire": true,
+      "round": "flame"
+    },
+    "scout_car": {
+      "name": "Scout car",
+      "sprite": "rider",
+      "hp": 150,
+      "attack": 16,
+      "defence": 10,
+      "speed": 40,
+      "reach": 16,
+      "sight": 230,
+      "cooldown": 1.5,
+      "rout_at": 20,
+      "mounted": true,
+      "vehicle": true
+    },
+    "sentry": {
+      "name": "Sentry",
+      "sprite": "archer",
+      "hp": 80,
+      "attack": 10,
+      "defence": 6,
+      "speed": 0,
+      "reach": 210,
+      "sight": 270,
+      "cooldown": 2.0,
+      "rout_at": -1000
+    },
+    "field_gun": {
+      "name": "Field gun",
+      "sprite": "catapult",
+      "hp": 140,
+      "attack": 30,
+      "defence": 4,
+      "speed": 8,
+      "reach": 270,
+      "sight": 310,
+      "cooldown": 3.0,
+      "rout_at": 5,
+      "siege": true,
+      "splash": 22,
+      "fire_ammo": 0.3,
+      "round": "shell",
+      "angle": 30
+    },
+    "sgt_hale": {
+      "name": "Sgt. Hale",
+      "title": "the Rock",
+      "sprite": "champion",
+      "style": 0,
+      "hero": true,
+      "hp": 1100,
+      "attack": 28,
+      "defence": 26,
+      "speed": 24,
+      "reach": 16,
+      "sight": 260,
+      "cooldown": 1.2,
+      "respawn": 30,
+      "skills": [
+        "body_armor",
+        "return_fire",
+        "dig_in",
+        "concussion"
+      ]
+    },
+    "col_rhodes": {
+      "name": "Col. Rhodes",
+      "title": "of the Spearhead",
+      "sprite": "commander",
+      "style": 0,
+      "hero": true,
+      "mounted": true,
+      "hp": 800,
+      "attack": 30,
+      "defence": 16,
+      "speed": 44,
+      "reach": 18,
+      "sight": 300,
+      "cooldown": 1.3,
+      "respawn": 30,
+      "skills": [
+        "command_flag",
+        "officer_presence",
+        "armored_charge",
+        "rally_whistle"
+      ]
+    },
+    "cpl_wren": {
+      "name": "Cpl. Wren",
+      "title": "the Sharpshooter",
+      "sprite": "ranger",
+      "style": 0,
+      "hero": true,
+      "hp": 480,
+      "attack": 24,
+      "defence": 8,
+      "speed": 26,
+      "reach": 230,
+      "sight": 310,
+      "cooldown": 1.5,
+      "respawn": 30,
+      "skills": [
+        "scope",
+        "headshot",
+        "suppressing_fire",
+        "armor_piercing"
+      ]
+    },
+    "medic_ambrose": {
+      "name": "Medic Ambrose",
+      "title": "the Healer",
+      "sprite": "mage",
+      "style": 0,
+      "hero": true,
+      "bolt": "holy",
+      "hp": 560,
+      "attack": 12,
+      "defence": 10,
+      "speed": 24,
+      "reach": 120,
+      "sight": 230,
+      "cooldown": 1.8,
+      "respawn": 30,
+      "skills": [
+        "field_hospital",
+        "combat_medic",
+        "first_aid",
+        "air_strike"
+      ]
+    },
+    "hptm_gorm": {
+      "name": "Hptm. Gorm",
+      "title": "Ironhide",
+      "sprite": "champion",
+      "style": 1,
+      "hero": true,
+      "hp": 1200,
+      "attack": 34,
+      "defence": 20,
+      "speed": 26,
+      "reach": 16,
+      "sight": 260,
+      "cooldown": 1.2,
+      "respawn": 30,
+      "skills": [
+        "adrenaline",
+        "combat_rage",
+        "grenade_spray",
+        "shock_and_awe"
+      ]
+    },
+    "gen_kael": {
+      "name": "Gen. Kael",
+      "title": "the Panzer Lord",
+      "sprite": "commander",
+      "style": 1,
+      "hero": true,
+      "mounted": true,
+      "hp": 820,
+      "attack": 32,
+      "defence": 16,
+      "speed": 46,
+      "reach": 18,
+      "sight": 300,
+      "cooldown": 1.3,
+      "respawn": 30,
+      "skills": [
+        "full_throttle",
+        "panzer_group",
+        "blitz_charge",
+        "armored_rally"
+      ]
+    },
+    "jager_sable": {
+      "name": "Jager Sable",
+      "title": "the Flame Marksman",
+      "sprite": "ranger",
+      "style": 1,
+      "hero": true,
+      "hp": 500,
+      "attack": 26,
+      "defence": 8,
+      "speed": 26,
+      "reach": 240,
+      "sight": 320,
+      "cooldown": 1.6,
+      "respawn": 30,
+      "skills": [
+        "incendiary_rounds",
+        "rangefinder",
+        "napalm",
+        "leg_shot"
+      ]
+    },
+    "dr_morwen": {
+      "name": "Dr. Morwen",
+      "title": "the Rocketeer",
+      "sprite": "mage",
+      "style": 1,
+      "hero": true,
+      "bolt": "hex",
+      "hp": 580,
+      "attack": 14,
+      "defence": 10,
+      "speed": 24,
+      "reach": 130,
+      "sight": 240,
+      "cooldown": 1.8,
+      "respawn": 30,
+      "skills": [
+        "artillery_doctrine",
+        "spoils_of_war",
+        "marked_for_death",
+        "rocket_barrage"
+      ]
+    },
+    "gen_edric": {
+      "name": "General Edric",
+      "title": "the Steadfast",
+      "sprite": "king",
+      "style": 0,
+      "hero": true,
+      "hp": 900,
+      "attack": 14,
+      "defence": 20,
+      "speed": 0,
+      "reach": 220,
+      "sight": 300,
+      "cooldown": 2.0,
+      "respawn": 60,
+      "skills": [
+        "command_umbrella",
+        "supply_line",
+        "general_offensive",
+        "hold_the_line"
+      ]
+    },
+    "marshal_varok": {
+      "name": "Marshal Varok",
+      "title": "the Iron Marshal",
+      "sprite": "king",
+      "style": 1,
+      "hero": true,
+      "hp": 900,
+      "attack": 14,
+      "defence": 20,
+      "speed": 0,
+      "reach": 220,
+      "sight": 300,
+      "cooldown": 2.0,
+      "respawn": 60,
+      "skills": [
+        "iron_discipline",
+        "blitz_doctrine",
+        "forced_march",
+        "barrage"
+      ]
+    },
+    "dive_bomber": {
+      "name": "Dive bomber",
+      "sprite": "wyvern",
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 62,
+      "max_alive": 6,
+      "hp": 120,
+      "attack": 26,
+      "defence": 2,
+      "speed": 55,
+      "reach": 40,
+      "sight": 420,
+      "cooldown": 2.5,
+      "rout_at": -1000,
+      "splash": 26,
+      "fire_ammo": 0.7,
+      "fair_weather": true
+    },
+    "fighter": {
+      "name": "Fighter",
+      "sprite": "hawk",
+      "flying": true,
+      "air_role": "air",
+      "altitude": 78,
+      "max_alive": 4,
+      "hp": 90,
+      "attack": 24,
+      "defence": 4,
+      "speed": 78,
+      "reach": 110,
+      "sight": 520,
+      "cooldown": 1.0,
+      "rout_at": -1000,
+      "storm_grounded": true
+    },
+    "flak_gun": {
+      "name": "Flak gun",
+      "sprite": "ballista",
+      "air_only": true,
+      "hp": 100,
+      "attack": 55,
+      "defence": 4,
+      "speed": 14,
+      "reach": 300,
+      "sight": 340,
+      "cooldown": 2.2,
+      "rout_at": 5,
+      "angle": 55,
+      "round": "flak"
+    },
+    "howitzer": {
+      "name": "Howitzer",
+      "sprite": "trebuchet",
+      "hp": 160,
+      "attack": 90,
+      "defence": 4,
+      "speed": 5,
+      "reach": 400,
+      "sight": 440,
+      "cooldown": 6.0,
+      "rout_at": 5,
+      "siege": true,
+      "splash": 34,
+      "angle": 74,
+      "fire_ammo": 0.25,
+      "round": "heavy"
+    },
+    "sniper": {
+      "name": "Sniper",
+      "sprite": "longbow",
+      "hp": 55,
+      "attack": 20,
+      "defence": 1,
+      "speed": 32,
+      "reach": 190,
+      "sight": 290,
+      "cooldown": 2.1,
+      "rout_at": 10,
+      "round": "sniper",
+      "flight_k": 0.5
+    },
+    "bazooka": {
+      "name": "Bazooka team",
+      "sprite": "halberdier",
+      "hp": 80,
+      "attack": 24,
+      "defence": 6,
+      "speed": 36,
+      "reach": 22,
+      "sight": 140,
+      "cooldown": 1.8,
+      "rout_at": 8,
+      "anti_mounted": true
+    },
+    "assault_trooper": {
+      "name": "Assault trooper",
+      "sprite": "berserker",
+      "hp": 65,
+      "attack": 32,
+      "defence": 2,
+      "speed": 44,
+      "reach": 16,
+      "sight": 140,
+      "cooldown": 1.3,
+      "rout_at": -1000,
+      "berserk": true
+    },
+    "war_dog": {
+      "name": "War dog",
+      "sprite": "war_dog",
+      "hp": 28,
+      "attack": 18,
+      "defence": 0,
+      "speed": 72,
+      "reach": 14,
+      "sight": 220,
+      "cooldown": 0.9,
+      "rout_at": -1000,
+      "hunts_routers": true
+    },
+    "at_rifle": {
+      "name": "Anti-tank rifleman",
+      "sprite": "pavise_cross",
+      "hp": 70,
+      "attack": 22,
+      "defence": 5,
+      "speed": 28,
+      "reach": 150,
+      "sight": 240,
+      "cooldown": 2.4,
+      "rout_at": 10,
+      "pierce_shield": true,
+      "round": "heavy_bullet"
+    },
+    "mortar": {
+      "name": "Mortar",
+      "sprite": "mangonel",
+      "hp": 90,
+      "attack": 50,
+      "defence": 3,
+      "speed": 10,
+      "reach": 220,
+      "sight": 270,
+      "cooldown": 3.2,
+      "rout_at": -1000,
+      "siege": true,
+      "fire_ammo": 1.0,
+      "splash": 22,
+      "angle": 68,
+      "smoke_ammo": 0.3,
+      "round": "bomb"
+    },
+    "tank": {
+      "name": "Assault tank",
+      "sprite": "ram_crew",
+      "hp": 130,
+      "attack": 42,
+      "defence": 8,
+      "speed": 8,
+      "reach": 18,
+      "sight": 60,
+      "cooldown": 3.0,
+      "rout_at": -1000,
+      "struct_only": true,
+      "vehicle": true
+    },
+    "heavy_fighter": {
+      "name": "Heavy fighter",
+      "sprite": "griffon",
+      "hp": 160,
+      "attack": 30,
+      "defence": 6,
+      "speed": 46,
+      "reach": 130,
+      "sight": 480,
+      "cooldown": 1.8,
+      "rout_at": -1000,
+      "flying": true,
+      "air_role": "air",
+      "altitude": 70,
+      "max_alive": 3,
+      "multirole": true,
+      "storm_grounded": true
+    },
+    "strafer": {
+      "name": "Strafer",
+      "sprite": "harpy",
+      "hp": 55,
+      "attack": 22,
+      "defence": 2,
+      "speed": 90,
+      "reach": 75,
+      "sight": 380,
+      "cooldown": 1.5,
+      "rout_at": -1000,
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 50,
+      "max_alive": 8,
+      "swoop": true,
+      "storm_grounded": true
+    },
+    "marine": {
+      "name": "Marine",
+      "sprite": "foot",
+      "hp": 70,
+      "attack": 17,
+      "defence": 6,
+      "speed": 38,
+      "reach": 14,
+      "sight": 150,
+      "cooldown": 1.3,
+      "rout_at": 12
+    },
+    "torpedo_boat": {
+      "name": "Torpedo boat",
+      "sprite": "longship",
+      "naval": true,
+      "naval_role": "ram",
+      "max_alive": 3,
+      "hp": 260,
+      "attack": 40,
+      "defence": 8,
+      "speed": 46,
+      "reach": 44,
+      "sight": 380,
+      "cooldown": 1.6,
+      "rout_at": -1000
+    },
+    "gunboat": {
+      "name": "Gunboat",
+      "sprite": "galley",
+      "naval": true,
+      "naval_role": "archer",
+      "max_alive": 2,
+      "hp": 220,
+      "attack": 18,
+      "defence": 5,
+      "speed": 28,
+      "reach": 230,
+      "sight": 320,
+      "cooldown": 1.3,
+      "rout_at": -1000,
+      "angle": 8
+    },
+    "cruiser": {
+      "name": "Cruiser",
+      "sprite": "catapult_ship",
+      "naval": true,
+      "naval_role": "bombard",
+      "bombard": true,
+      "max_alive": 2,
+      "hp": 280,
+      "attack": 62,
+      "defence": 6,
+      "speed": 18,
+      "reach": 340,
+      "sight": 400,
+      "cooldown": 4.0,
+      "rout_at": -1000,
+      "splash": 26,
+      "angle": 30,
+      "round": "naval_heavy"
+    },
+    "landing_craft": {
+      "name": "Landing craft",
+      "sprite": "landing_boat",
+      "naval": true,
+      "naval_role": "transport",
+      "carry": 6,
+      "max_alive": 2,
+      "hp": 110,
+      "attack": 0,
+      "defence": 3,
+      "speed": 40,
+      "reach": 0,
+      "sight": 200,
+      "cooldown": 9.0,
+      "rout_at": -1000
+    },
+    "gi_rifleman": {
+      "name": "GI rifleman",
+      "sprite": "foot",
+      "hp": 105,
+      "attack": 11,
+      "defence": 10,
+      "speed": 25,
+      "reach": 20,
+      "sight": 200,
+      "cooldown": 1.6,
+      "rout_at": 20,
+      "anti_mounted": true,
+      "side": "allies",
+      "replaces": "rifleman"
+    },
+    "jeep": {
+      "name": "Jeep",
+      "sprite": "rider",
+      "hp": 175,
+      "attack": 15,
+      "defence": 13,
+      "speed": 37,
+      "reach": 16,
+      "sight": 230,
+      "cooldown": 1.5,
+      "rout_at": 20,
+      "mounted": true,
+      "side": "allies",
+      "replaces": "scout_car",
+      "vehicle": true
+    },
+    "grenadier": {
+      "name": "Grenadier",
+      "sprite": "foot",
+      "hp": 125,
+      "attack": 16,
+      "defence": 6,
+      "speed": 28,
+      "reach": 13,
+      "sight": 200,
+      "cooldown": 1.3,
+      "rout_at": 20,
+      "side": "axis",
+      "replaces": "rifleman"
+    },
+    "mg_team": {
+      "name": "MG team",
+      "sprite": "archer",
+      "hp": 52,
+      "attack": 8,
+      "defence": 2,
+      "speed": 28,
+      "reach": 140,
+      "sight": 230,
+      "cooldown": 1.5,
+      "rout_at": 20,
+      "volley": true,
+      "fire": true,
+      "side": "axis",
+      "replaces": "machine_gunner",
+      "round": "bullet"
+    },
+    "sidecar_bike": {
+      "name": "Sidecar motorcycle",
+      "sprite": "rider",
+      "hp": 125,
+      "attack": 19,
+      "defence": 6,
+      "speed": 46,
+      "reach": 16,
+      "sight": 230,
+      "cooldown": 1.5,
+      "rout_at": 20,
+      "mounted": true,
+      "side": "axis",
+      "replaces": "scout_car",
+      "vehicle": true
+    },
+    "rocket_launcher": {
+      "name": "Rocket launcher",
+      "sprite": "catapult",
+      "hp": 140,
+      "attack": 30,
+      "defence": 4,
+      "speed": 8,
+      "reach": 270,
+      "sight": 310,
+      "cooldown": 3.0,
+      "rout_at": 5,
+      "siege": true,
+      "splash": 24,
+      "fire_ammo": 0.6,
+      "side": "axis",
+      "replaces": "field_gun",
+      "round": "rocket",
+      "angle": 22,
+      "flight_k": 0.7
+    },
+    "halftrack": {
+      "name": "Halftrack",
+      "sprite": "siege_tower",
+      "tower": true,
+      "garrison": 5,
+      "shoot_height": 10,
+      "hp": 420,
+      "attack": 8,
+      "defence": 10,
+      "speed": 9,
+      "reach": 200,
+      "sight": 260,
+      "cooldown": 1.8,
+      "rout_at": -1000,
+      "angle": 40,
+      "volley": false,
+      "vehicle": true
+    },
+    "armored_halftrack": {
+      "name": "Armoured halftrack",
+      "sprite": "siege_tower",
+      "tower": true,
+      "garrison": 6,
+      "shoot_height": 10,
+      "hp": 480,
+      "attack": 7,
+      "defence": 10,
+      "speed": 8,
+      "reach": 190,
+      "sight": 260,
+      "cooldown": 1.8,
+      "rout_at": -1000,
+      "angle": 40,
+      "volley": false,
+      "fire": true,
+      "side": "axis",
+      "replaces": "halftrack",
+      "vehicle": true
+    },
+    "dauntless": {
+      "name": "Dauntless bomber",
+      "sprite": "wyvern",
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 62,
+      "max_alive": 6,
+      "hp": 135,
+      "attack": 26,
+      "defence": 2,
+      "speed": 57,
+      "reach": 40,
+      "sight": 420,
+      "cooldown": 2.5,
+      "rout_at": -1000,
+      "splash": 30,
+      "fire_ammo": 0.3,
+      "side": "allies",
+      "replaces": "dive_bomber",
+      "fair_weather": true
+    },
+    "mustang": {
+      "name": "Mustang",
+      "sprite": "hawk",
+      "flying": true,
+      "air_role": "air",
+      "altitude": 78,
+      "max_alive": 4,
+      "hp": 84,
+      "attack": 26,
+      "defence": 4,
+      "speed": 84,
+      "reach": 110,
+      "sight": 520,
+      "cooldown": 0.9,
+      "rout_at": -1000,
+      "side": "allies",
+      "replaces": "fighter",
+      "storm_grounded": true
+    },
+    "thunderbolt": {
+      "name": "Thunderbolt",
+      "sprite": "griffon",
+      "hp": 185,
+      "attack": 28,
+      "defence": 8,
+      "speed": 46,
+      "reach": 130,
+      "sight": 480,
+      "cooldown": 1.8,
+      "rout_at": -1000,
+      "flying": true,
+      "air_role": "air",
+      "altitude": 70,
+      "max_alive": 3,
+      "side": "allies",
+      "replaces": "heavy_fighter",
+      "multirole": true,
+      "storm_grounded": true
+    },
+    "typhoon": {
+      "name": "Typhoon",
+      "sprite": "harpy",
+      "hp": 50,
+      "attack": 20,
+      "defence": 2,
+      "speed": 95,
+      "reach": 75,
+      "sight": 380,
+      "cooldown": 1.5,
+      "rout_at": -1000,
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 50,
+      "max_alive": 8,
+      "swoop": true,
+      "side": "allies",
+      "replaces": "strafer",
+      "storm_grounded": true
+    },
+    "stuka": {
+      "name": "Stuka",
+      "sprite": "wyvern",
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 62,
+      "max_alive": 6,
+      "hp": 115,
+      "attack": 30,
+      "defence": 2,
+      "speed": 52,
+      "reach": 40,
+      "sight": 420,
+      "cooldown": 2.5,
+      "rout_at": -1000,
+      "splash": 22,
+      "fire_ammo": 1.0,
+      "side": "axis",
+      "replaces": "dive_bomber",
+      "fair_weather": true
+    },
+    "messerschmitt": {
+      "name": "Messerschmitt",
+      "sprite": "hawk",
+      "flying": true,
+      "air_role": "air",
+      "altitude": 78,
+      "max_alive": 4,
+      "hp": 100,
+      "attack": 22,
+      "defence": 5,
+      "speed": 72,
+      "reach": 110,
+      "sight": 520,
+      "cooldown": 1.1,
+      "rout_at": -1000,
+      "side": "axis",
+      "replaces": "fighter",
+      "storm_grounded": true
+    },
+    "focke_wulf": {
+      "name": "Focke-Wulf",
+      "sprite": "griffon",
+      "hp": 150,
+      "attack": 36,
+      "defence": 6,
+      "speed": 44,
+      "reach": 130,
+      "sight": 480,
+      "cooldown": 1.9,
+      "rout_at": -1000,
+      "flying": true,
+      "air_role": "air",
+      "altitude": 70,
+      "max_alive": 3,
+      "side": "axis",
+      "replaces": "heavy_fighter",
+      "multirole": true,
+      "storm_grounded": true
+    },
+    "henschel": {
+      "name": "Henschel",
+      "sprite": "harpy",
+      "hp": 62,
+      "attack": 26,
+      "defence": 2,
+      "speed": 86,
+      "reach": 75,
+      "sight": 380,
+      "cooldown": 1.5,
+      "rout_at": -1000,
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 50,
+      "max_alive": 8,
+      "swoop": true,
+      "side": "axis",
+      "replaces": "strafer",
+      "storm_grounded": true
+    },
+    "pt_boat": {
+      "name": "PT boat",
+      "sprite": "longship",
+      "naval": true,
+      "naval_role": "ram",
+      "max_alive": 3,
+      "hp": 240,
+      "attack": 36,
+      "defence": 8,
+      "speed": 50,
+      "reach": 44,
+      "sight": 380,
+      "cooldown": 1.6,
+      "rout_at": -1000,
+      "side": "allies",
+      "replaces": "torpedo_boat"
+    },
+    "patrol_gunboat": {
+      "name": "Patrol gunboat",
+      "sprite": "galley",
+      "naval": true,
+      "naval_role": "archer",
+      "max_alive": 2,
+      "hp": 250,
+      "attack": 19,
+      "defence": 5,
+      "speed": 28,
+      "reach": 250,
+      "sight": 320,
+      "cooldown": 1.2,
+      "rout_at": -1000,
+      "side": "allies",
+      "replaces": "gunboat",
+      "angle": 8
+    },
+    "monitor": {
+      "name": "Monitor",
+      "sprite": "catapult_ship",
+      "naval": true,
+      "naval_role": "bombard",
+      "bombard": true,
+      "max_alive": 2,
+      "hp": 280,
+      "attack": 58,
+      "defence": 6,
+      "speed": 18,
+      "reach": 360,
+      "sight": 400,
+      "cooldown": 3.6,
+      "rout_at": -1000,
+      "splash": 22,
+      "angle": 30,
+      "side": "allies",
+      "replaces": "cruiser",
+      "round": "naval_heavy"
+    },
+    "lcvp": {
+      "name": "Higgins boat",
+      "sprite": "landing_boat",
+      "naval": true,
+      "naval_role": "transport",
+      "carry": 8,
+      "max_alive": 2,
+      "hp": 130,
+      "attack": 0,
+      "defence": 3,
+      "speed": 34,
+      "reach": 0,
+      "sight": 200,
+      "cooldown": 9.0,
+      "rout_at": -1000,
+      "side": "allies",
+      "replaces": "landing_craft"
+    },
+    "e_boat": {
+      "name": "E-boat",
+      "sprite": "longship",
+      "naval": true,
+      "naval_role": "ram",
+      "max_alive": 3,
+      "hp": 300,
+      "attack": 46,
+      "defence": 8,
+      "speed": 44,
+      "reach": 44,
+      "sight": 380,
+      "cooldown": 1.6,
+      "rout_at": -1000,
+      "side": "axis",
+      "replaces": "torpedo_boat"
+    },
+    "flak_boat": {
+      "name": "Flak boat",
+      "sprite": "galley",
+      "naval": true,
+      "naval_role": "archer",
+      "max_alive": 2,
+      "hp": 220,
+      "attack": 17,
+      "defence": 5,
+      "speed": 28,
+      "reach": 210,
+      "sight": 320,
+      "cooldown": 1.4,
+      "rout_at": -1000,
+      "fire": true,
+      "side": "axis",
+      "replaces": "gunboat",
+      "angle": 8
+    },
+    "rocket_ship": {
+      "name": "Rocket ship",
+      "sprite": "catapult_ship",
+      "naval": true,
+      "naval_role": "bombard",
+      "bombard": true,
+      "max_alive": 2,
+      "hp": 280,
+      "attack": 66,
+      "defence": 6,
+      "speed": 18,
+      "reach": 340,
+      "sight": 400,
+      "cooldown": 4.4,
+      "rout_at": -1000,
+      "splash": 30,
+      "angle": 30,
+      "fire_ammo": 0.7,
+      "side": "axis",
+      "replaces": "cruiser",
+      "round": "rocket_salvo",
+      "flight_k": 0.8
+    },
+    "landing_barge": {
+      "name": "Landing barge",
+      "sprite": "landing_boat",
+      "naval": true,
+      "naval_role": "transport",
+      "carry": 6,
+      "max_alive": 2,
+      "hp": 100,
+      "attack": 0,
+      "defence": 3,
+      "speed": 46,
+      "reach": 0,
+      "sight": 200,
+      "cooldown": 9.0,
+      "rout_at": -1000,
+      "side": "axis",
+      "replaces": "landing_craft"
+    },
+    "allied_marine": {
+      "name": "Marine",
+      "sprite": "foot",
+      "hp": 80,
+      "attack": 16,
+      "defence": 8,
+      "speed": 38,
+      "reach": 14,
+      "sight": 150,
+      "cooldown": 1.3,
+      "rout_at": 12,
+      "side": "allies",
+      "replaces": "marine"
+    },
+    "naval_infantry": {
+      "name": "Naval infantry",
+      "sprite": "foot",
+      "hp": 70,
+      "attack": 22,
+      "defence": 4,
+      "speed": 38,
+      "reach": 14,
+      "sight": 150,
+      "cooldown": 1.3,
+      "rout_at": 12,
+      "berserk": true,
+      "side": "axis",
+      "replaces": "marine"
+    },
+    "engineer": {
+      "sprite": "engineer",
+      "name": "Engineer",
+      "hp": 90,
+      "attack": 9,
+      "defence": 6,
+      "speed": 24,
+      "reach": 16,
+      "sight": 140,
+      "cooldown": 1.6,
+      "sapper": true,
+      "charge": 95,
+      "rout_at": 15
+    },
+    "combat_engineer": {
+      "sprite": "engineer",
+      "name": "Combat engineer",
+      "hp": 90,
+      "attack": 9,
+      "defence": 6,
+      "speed": 24,
+      "reach": 16,
+      "sight": 140,
+      "cooldown": 1.6,
+      "sapper": true,
+      "charge": 95,
+      "rout_at": 15,
+      "side": "allies",
+      "replaces": "engineer"
+    },
+    "pionier": {
+      "sprite": "engineer",
+      "name": "Pionier",
+      "hp": 90,
+      "attack": 9,
+      "defence": 6,
+      "speed": 24,
+      "reach": 16,
+      "sight": 140,
+      "cooldown": 1.6,
+      "sapper": true,
+      "charge": 95,
+      "rout_at": 15,
+      "side": "axis",
+      "replaces": "engineer"
+    },
+    "medic": {
+      "sprite": "medic",
+      "name": "Medic",
+      "hp": 80,
+      "attack": 4,
+      "defence": 4,
+      "speed": 26,
+      "reach": 12,
+      "sight": 120,
+      "cooldown": 2.0,
+      "heal": 7,
+      "heal_radius": 64,
+      "rout_at": 15
+    },
+    "combat_medic": {
+      "sprite": "medic",
+      "name": "Combat medic",
+      "hp": 80,
+      "attack": 4,
+      "defence": 4,
+      "speed": 26,
+      "reach": 12,
+      "sight": 120,
+      "cooldown": 2.0,
+      "heal": 7,
+      "heal_radius": 64,
+      "rout_at": 15,
+      "side": "allies",
+      "replaces": "medic"
+    },
+    "sanitater": {
+      "sprite": "medic",
+      "name": "Sanitäter",
+      "hp": 80,
+      "attack": 4,
+      "defence": 4,
+      "speed": 26,
+      "reach": 12,
+      "sight": 120,
+      "cooldown": 2.0,
+      "heal": 7,
+      "heal_radius": 64,
+      "rout_at": 15,
+      "side": "axis",
+      "replaces": "medic"
+    },
+    "commando": {
+      "sprite": "commando",
+      "name": "Commando",
+      "hp": 105,
+      "attack": 16,
+      "defence": 6,
+      "speed": 40,
+      "reach": 16,
+      "sight": 210,
+      "cooldown": 1.0,
+      "rout_at": 10
+    },
+    "ranger": {
+      "sprite": "commando",
+      "name": "Ranger",
+      "hp": 105,
+      "attack": 16,
+      "defence": 6,
+      "speed": 40,
+      "reach": 16,
+      "sight": 210,
+      "cooldown": 1.0,
+      "rout_at": 10,
+      "side": "allies",
+      "replaces": "commando"
+    },
+    "brandenburger": {
+      "sprite": "commando",
+      "name": "Brandenburger",
+      "hp": 105,
+      "attack": 16,
+      "defence": 6,
+      "speed": 40,
+      "reach": 16,
+      "sight": 210,
+      "cooldown": 1.0,
+      "rout_at": 10,
+      "side": "axis",
+      "replaces": "commando"
+    },
+    "flame_squad": {
+      "name": "Flame squad",
+      "sprite": "flame_squad",
+      "hp": 90,
+      "attack": 14,
+      "defence": 3,
+      "speed": 24,
+      "reach": 140,
+      "sight": 240,
+      "cooldown": 2.5,
+      "rout_at": 20,
+      "volley": true,
+      "fire": true,
+      "round": "flame"
+    },
+    "hmg_nest": {
+      "name": "MG nest",
+      "sprite": "hmg_nest",
+      "hp": 230,
+      "attack": 8.1,
+      "defence": 10,
+      "speed": 0,
+      "reach": 250,
+      "sight": 320,
+      "cooldown": 0.5,
+      "rout_at": -1000,
+      "round": "hmg"
+    },
+    "browning_nest": {
+      "name": "M1919 nest",
+      "sprite": "hmg_nest",
+      "hp": 230,
+      "attack": 8.1,
+      "defence": 10,
+      "speed": 0,
+      "reach": 250,
+      "sight": 320,
+      "cooldown": 0.5,
+      "rout_at": -1000,
+      "side": "allies",
+      "replaces": "hmg_nest",
+      "round": "hmg"
+    },
+    "mg42_nest": {
+      "name": "MG 42 nest",
+      "sprite": "hmg_nest",
+      "hp": 230,
+      "attack": 8.1,
+      "defence": 10,
+      "speed": 0,
+      "reach": 250,
+      "sight": 320,
+      "cooldown": 0.5,
+      "rout_at": -1000,
+      "side": "axis",
+      "replaces": "hmg_nest",
+      "round": "hmg"
+    },
+    "paratrooper": {
+      "name": "Paratrooper",
+      "sprite": "paratrooper",
+      "hp": 105,
+      "attack": 12,
+      "defence": 8,
+      "speed": 30,
+      "reach": 14,
+      "sight": 200,
+      "cooldown": 1.4,
+      "rout_at": 20,
+      "paratrooper": true
+    },
+    "airborne": {
+      "name": "Paratrooper",
+      "sprite": "paratrooper",
+      "hp": 105,
+      "attack": 12,
+      "defence": 8,
+      "speed": 30,
+      "reach": 14,
+      "sight": 200,
+      "cooldown": 1.4,
+      "rout_at": 20,
+      "paratrooper": true,
+      "side": "allies",
+      "replaces": "paratrooper"
+    },
+    "fallschirmjager": {
+      "name": "Fallschirmjäger",
+      "sprite": "paratrooper",
+      "hp": 105,
+      "attack": 12,
+      "defence": 8,
+      "speed": 30,
+      "reach": 14,
+      "sight": 200,
+      "cooldown": 1.4,
+      "rout_at": 20,
+      "paratrooper": true,
+      "side": "axis",
+      "replaces": "paratrooper"
+    },
+    "armored_car": {
+      "sprite": "armored_car",
+      "name": "Armoured car",
+      "hp": 210,
+      "attack": 18,
+      "defence": 12,
+      "speed": 55,
+      "reach": 150,
+      "sight": 270,
+      "cooldown": 0.8,
+      "mounted": true,
+      "vehicle": true,
+      "rout_at": 0,
+      "round": "hmg"
+    },
+    "greyhound": {
+      "sprite": "armored_car",
+      "name": "M8 Greyhound",
+      "hp": 210,
+      "attack": 18,
+      "defence": 12,
+      "speed": 55,
+      "reach": 150,
+      "sight": 270,
+      "cooldown": 0.8,
+      "mounted": true,
+      "vehicle": true,
+      "rout_at": 0,
+      "side": "allies",
+      "replaces": "armored_car",
+      "round": "hmg"
+    },
+    "puma": {
+      "sprite": "armored_car",
+      "name": "Sd.Kfz. 234 Puma",
+      "hp": 210,
+      "attack": 18,
+      "defence": 12,
+      "speed": 55,
+      "reach": 150,
+      "sight": 270,
+      "cooldown": 0.8,
+      "mounted": true,
+      "vehicle": true,
+      "rout_at": 0,
+      "side": "axis",
+      "replaces": "armored_car",
+      "round": "hmg"
+    },
+    "tank_destroyer": {
+      "sprite": "tank_destroyer",
+      "name": "Tank destroyer",
+      "hp": 330,
+      "attack": 80,
+      "defence": 16,
+      "speed": 20,
+      "reach": 240,
+      "sight": 300,
+      "cooldown": 4.0,
+      "siege": true,
+      "anti_mounted": true,
+      "vehicle": true,
+      "angle": 8,
+      "splash": 12,
+      "rout_at": -1000,
+      "round": "ap",
+      "flight_k": 0.45
+    },
+    "wolverine": {
+      "sprite": "tank_destroyer",
+      "name": "M10 Wolverine",
+      "hp": 330,
+      "attack": 80,
+      "defence": 16,
+      "speed": 20,
+      "reach": 240,
+      "sight": 300,
+      "cooldown": 4.0,
+      "siege": true,
+      "anti_mounted": true,
+      "vehicle": true,
+      "angle": 8,
+      "splash": 12,
+      "rout_at": -1000,
+      "side": "allies",
+      "replaces": "tank_destroyer",
+      "round": "ap",
+      "flight_k": 0.45
+    },
+    "jagdpanzer": {
+      "sprite": "tank_destroyer",
+      "name": "Jagdpanzer IV",
+      "hp": 330,
+      "attack": 80,
+      "defence": 16,
+      "speed": 20,
+      "reach": 240,
+      "sight": 300,
+      "cooldown": 4.0,
+      "siege": true,
+      "anti_mounted": true,
+      "vehicle": true,
+      "angle": 8,
+      "splash": 12,
+      "rout_at": -1000,
+      "side": "axis",
+      "replaces": "tank_destroyer",
+      "round": "ap",
+      "flight_k": 0.45
+    },
+    "supply_plane": {
+      "sprite": "transport",
+      "name": "Supply plane",
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 60,
+      "max_alive": 1,
+      "hp": 520,
+      "attack": 0.1,
+      "defence": 40,
+      "speed": 75,
+      "reach": 10,
+      "sight": 100,
+      "cooldown": 3.0,
+      "rout_at": -1000,
+      "cargo": "crate",
+      "fair_weather": true
+    },
+    "para_plane": {
+      "sprite": "transport",
+      "name": "Paradrop plane",
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 60,
+      "max_alive": 1,
+      "hp": 520,
+      "attack": 0.1,
+      "defence": 40,
+      "speed": 75,
+      "reach": 10,
+      "sight": 100,
+      "cooldown": 3.0,
+      "rout_at": -1000,
+      "cargo": "paratroopers",
+      "fair_weather": true,
+      "cargo_n": 8,
+      "cargo_unit": "paratrooper"
+    },
+    "heavy_bomber": {
+      "sprite": "heavy_bomber",
+      "name": "Heavy bomber",
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 88,
+      "max_alive": 1,
+      "hp": 380,
+      "attack": 30,
+      "defence": 24,
+      "speed": 42,
+      "reach": 40,
+      "sight": 100,
+      "cooldown": 0.5,
+      "rout_at": -1000,
+      "splash": 34,
+      "fire_ammo": 0.2,
+      "carpet": true,
+      "fair_weather": true
+    },
+    "fortress": {
+      "sprite": "heavy_bomber",
+      "name": "B-17 Fortress",
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 88,
+      "max_alive": 1,
+      "hp": 380,
+      "attack": 30,
+      "defence": 24,
+      "speed": 42,
+      "reach": 40,
+      "sight": 100,
+      "cooldown": 0.5,
+      "rout_at": -1000,
+      "splash": 34,
+      "fire_ammo": 0.2,
+      "carpet": true,
+      "fair_weather": true,
+      "side": "allies",
+      "replaces": "heavy_bomber"
+    },
+    "heinkel": {
+      "sprite": "heavy_bomber",
+      "name": "He 111",
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 88,
+      "max_alive": 1,
+      "hp": 380,
+      "attack": 30,
+      "defence": 24,
+      "speed": 42,
+      "reach": 40,
+      "sight": 100,
+      "cooldown": 0.5,
+      "rout_at": -1000,
+      "splash": 34,
+      "fire_ammo": 0.2,
+      "carpet": true,
+      "fair_weather": true,
+      "side": "axis",
+      "replaces": "heavy_bomber"
+    },
+    "destroyer": {
+      "sprite": "destroyer",
+      "name": "Destroyer",
+      "naval": true,
+      "naval_role": "archer",
+      "aa": true,
+      "asw": true,
+      "max_alive": 1,
+      "hp": 430,
+      "attack": 24,
+      "defence": 8,
+      "speed": 32,
+      "reach": 285,
+      "sight": 430,
+      "cooldown": 0.9,
+      "rout_at": -1000,
+      "angle": 8
+    },
+    "fletcher": {
+      "sprite": "destroyer",
+      "name": "Fletcher destroyer",
+      "naval": true,
+      "naval_role": "archer",
+      "aa": true,
+      "asw": true,
+      "max_alive": 1,
+      "hp": 430,
+      "attack": 24,
+      "defence": 8,
+      "speed": 32,
+      "reach": 285,
+      "sight": 430,
+      "cooldown": 0.9,
+      "rout_at": -1000,
+      "angle": 8,
+      "side": "allies",
+      "replaces": "destroyer"
+    },
+    "z_class": {
+      "sprite": "destroyer",
+      "name": "Z-class destroyer",
+      "naval": true,
+      "naval_role": "archer",
+      "aa": true,
+      "asw": true,
+      "max_alive": 1,
+      "hp": 430,
+      "attack": 24,
+      "defence": 8,
+      "speed": 32,
+      "reach": 285,
+      "sight": 430,
+      "cooldown": 0.9,
+      "rout_at": -1000,
+      "angle": 8,
+      "side": "axis",
+      "replaces": "destroyer"
+    },
+    "submarine": {
+      "sprite": "submarine",
+      "name": "Submarine",
+      "naval": true,
+      "naval_role": "sub",
+      "submerged": true,
+      "torpedo": true,
+      "max_alive": 2,
+      "hp": 170,
+      "attack": 85,
+      "defence": 5,
+      "speed": 24,
+      "reach": 175,
+      "sight": 370,
+      "cooldown": 5.0,
+      "rout_at": -1000,
+      "angle": 0,
+      "splash": 28
+    },
+    "gato": {
+      "sprite": "submarine",
+      "name": "Gato submarine",
+      "naval": true,
+      "naval_role": "sub",
+      "submerged": true,
+      "torpedo": true,
+      "max_alive": 2,
+      "hp": 170,
+      "attack": 85,
+      "defence": 5,
+      "speed": 24,
+      "reach": 175,
+      "sight": 370,
+      "cooldown": 5.0,
+      "rout_at": -1000,
+      "angle": 0,
+      "splash": 28,
+      "side": "allies",
+      "replaces": "submarine"
+    },
+    "u_boat": {
+      "sprite": "submarine",
+      "name": "U-boat",
+      "naval": true,
+      "naval_role": "sub",
+      "submerged": true,
+      "torpedo": true,
+      "max_alive": 2,
+      "hp": 170,
+      "attack": 85,
+      "defence": 5,
+      "speed": 24,
+      "reach": 175,
+      "sight": 370,
+      "cooldown": 5.0,
+      "rout_at": -1000,
+      "angle": 0,
+      "splash": 28,
+      "side": "axis",
+      "replaces": "submarine"
+    },
+    "mlrs_pod": {
+      "name": "MLRS pod",
+      "sprite": "mlrs",
+      "hp": 130,
+      "attack": 38,
+      "defence": 3,
+      "speed": 9,
+      "reach": 380,
+      "sight": 420,
+      "cooldown": 10.0,
+      "rout_at": 5,
+      "siege": true,
+      "salvo": 10,
+      "spread": 32,
+      "splash": 22,
+      "angle": 48
+    },
+    "v2_launcher": {
+      "name": "V-2 launcher",
+      "sprite": "v2_launcher",
+      "hp": 170,
+      "attack": 300,
+      "defence": 3,
+      "speed": 6,
+      "reach": 560,
+      "sight": 600,
+      "cooldown": 18.0,
+      "rout_at": 5,
+      "siege": true,
+      "v2": true,
+      "splash": 62,
+      "angle": 80
+    },
+    "carrier": {
+      "name": "Aircraft carrier",
+      "sprite": "carrier",
+      "naval": true,
+      "naval_role": "carrier",
+      "max_alive": 1,
+      "hp": 520,
+      "attack": 12,
+      "defence": 8,
+      "speed": 12,
+      "reach": 170,
+      "sight": 320,
+      "cooldown": 1.6,
+      "rout_at": -1000,
+      "aa": true,
+      "angle": 20,
+      "hangar": 4,
+      "sortie": 2,
+      "sortie_every": 14.0,
+      "wing": [
+        "avenger",
+        "hellcat"
+      ]
+    },
+    "dreadnought": {
+      "name": "Dreadnought",
+      "sprite": "dreadnought",
+      "naval": true,
+      "naval_role": "bombard",
+      "bombard": true,
+      "max_alive": 1,
+      "hp": 640,
+      "attack": 70,
+      "defence": 9,
+      "speed": 11,
+      "reach": 520,
+      "sight": 580,
+      "cooldown": 5.5,
+      "rout_at": -1000,
+      "aa": true,
+      "splash": 28,
+      "angle": 30,
+      "volley_targets": 4,
+      "round": "naval_heavy"
+    },
+    "avenger": {
+      "name": "Avenger",
+      "sprite": "wyvern",
+      "flying": true,
+      "air_role": "ground",
+      "altitude": 60,
+      "max_alive": 8,
+      "hp": 130,
+      "attack": 24,
+      "defence": 2,
+      "speed": 56,
+      "reach": 40,
+      "sight": 420,
+      "cooldown": 2.2,
+      "rout_at": -1000,
+      "splash": 36,
+      "fire_ammo": 0.3,
+      "fair_weather": true
+    },
+    "hellcat": {
+      "name": "Hellcat",
+      "sprite": "hawk",
+      "flying": true,
+      "air_role": "air",
+      "altitude": 76,
+      "max_alive": 6,
+      "hp": 110,
+      "attack": 24,
+      "defence": 3,
+      "speed": 80,
+      "reach": 120,
+      "sight": 500,
+      "cooldown": 1.0,
+      "rout_at": -1000,
+      "multirole": true,
+      "storm_grounded": true
+    }
+  },
+  "terrain": [
+    {
+      "id": "ditch_ally_north",
+      "rect": [
+        4,
+        170,
+        302,
+        12
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "ditch_ally_south",
+      "rect": [
+        4,
+        530,
+        302,
+        12
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "ditch_ally_west",
+      "rect": [
+        4,
+        170,
+        10,
+        372
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "ditch_ally_east_up",
+      "rect": [
+        296,
+        170,
+        10,
+        150
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "ditch_ally_east_down",
+      "rect": [
+        296,
+        400,
+        10,
+        142
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "ally_north",
+      "rect": [
+        30,
+        200,
+        240,
+        14
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "allies",
+      "hp": 320,
+      "name": "north perimeter wall of the Allied camp"
+    },
+    {
+      "id": "ally_south",
+      "rect": [
+        30,
+        506,
+        240,
+        14
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "allies",
+      "hp": 320,
+      "name": "south perimeter wall of the Allied camp"
+    },
+    {
+      "id": "ally_west",
+      "rect": [
+        30,
+        200,
+        14,
+        320
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "allies",
+      "hp": 320,
+      "name": "west perimeter wall of the Allied camp"
+    },
+    {
+      "id": "ally_east_up",
+      "rect": [
+        256,
+        200,
+        14,
+        120
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "allies",
+      "hp": 320,
+      "name": "east perimeter wall of the Allied camp"
+    },
+    {
+      "id": "ally_east_down",
+      "rect": [
+        256,
+        400,
+        14,
+        120
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "allies",
+      "hp": 320,
+      "name": "east perimeter wall of the Allied camp"
+    },
+    {
+      "id": "gate_left",
+      "rect": [
+        256,
+        320,
+        14,
+        80
+      ],
+      "color": [
+        92,
+        84,
+        70
+      ],
+      "solid": true,
+      "style": "gate",
+      "height": 26,
+      "owner": "allies",
+      "hp": 160,
+      "name": "west checkpoint of the Allied camp"
+    },
+    {
+      "id": "ally_tower_nw",
+      "rect": [
+        18,
+        188,
+        36,
+        36
+      ],
+      "color": [
+        112,
+        106,
+        86
+      ],
+      "solid": true,
+      "style": "tower",
+      "height": 60,
+      "owner": "allies",
+      "hp": 300,
+      "name": "north-west watchtower of the Allied camp"
+    },
+    {
+      "id": "ally_tower_sw",
+      "rect": [
+        18,
+        496,
+        36,
+        36
+      ],
+      "color": [
+        112,
+        106,
+        86
+      ],
+      "solid": true,
+      "style": "tower",
+      "height": 60,
+      "owner": "allies",
+      "hp": 300,
+      "name": "south-west watchtower of the Allied camp"
+    },
+    {
+      "id": "ally_tower_ne",
+      "rect": [
+        254,
+        188,
+        36,
+        36
+      ],
+      "color": [
+        112,
+        106,
+        86
+      ],
+      "solid": true,
+      "style": "tower",
+      "height": 60,
+      "owner": "allies",
+      "hp": 300,
+      "name": "north-east watchtower of the Allied camp"
+    },
+    {
+      "id": "ally_tower_se",
+      "rect": [
+        254,
+        496,
+        36,
+        36
+      ],
+      "color": [
+        112,
+        106,
+        86
+      ],
+      "solid": true,
+      "style": "tower",
+      "height": 60,
+      "owner": "allies",
+      "hp": 300,
+      "name": "south-east watchtower of the Allied camp"
+    },
+    {
+      "id": "ally_keep",
+      "rect": [
+        110,
+        300,
+        70,
+        120
+      ],
+      "color": [
+        98,
+        102,
+        90
+      ],
+      "solid": false,
+      "style": "keep",
+      "height": 44,
+      "owner": "allies"
+    },
+    {
+      "id": "ally_palisade_n",
+      "rect": [
+        330,
+        250,
+        10,
+        60
+      ],
+      "color": [
+        74,
+        76,
+        80
+      ],
+      "solid": true,
+      "style": "palisade",
+      "height": 16,
+      "owner": "allies",
+      "hp": 90,
+      "name": "tank traps of the Allied camp"
+    },
+    {
+      "id": "ally_palisade_s",
+      "rect": [
+        330,
+        410,
+        10,
+        60
+      ],
+      "color": [
+        74,
+        76,
+        80
+      ],
+      "solid": true,
+      "style": "palisade",
+      "height": 16,
+      "owner": "allies",
+      "hp": 90,
+      "name": "tank traps of the Allied camp"
+    },
+    {
+      "id": "ditch_axis_north",
+      "rect": [
+        5694,
+        170,
+        302,
+        12
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "ditch_axis_south",
+      "rect": [
+        5694,
+        530,
+        302,
+        12
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "ditch_axis_east",
+      "rect": [
+        5986,
+        170,
+        10,
+        372
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "ditch_axis_west_up",
+      "rect": [
+        5694,
+        170,
+        10,
+        150
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "ditch_axis_west_down",
+      "rect": [
+        5694,
+        400,
+        10,
+        142
+      ],
+      "color": [
+        84,
+        72,
+        50
+      ],
+      "solid": true,
+      "style": "moat"
+    },
+    {
+      "id": "axis_north",
+      "rect": [
+        5730,
+        200,
+        240,
+        14
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "axis",
+      "hp": 320,
+      "name": "north perimeter wall of the Axis camp"
+    },
+    {
+      "id": "axis_south",
+      "rect": [
+        5730,
+        506,
+        240,
+        14
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "axis",
+      "hp": 320,
+      "name": "south perimeter wall of the Axis camp"
+    },
+    {
+      "id": "axis_east",
+      "rect": [
+        5956,
+        200,
+        14,
+        320
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "axis",
+      "hp": 320,
+      "name": "east perimeter wall of the Axis camp"
+    },
+    {
+      "id": "axis_west_up",
+      "rect": [
+        5730,
+        200,
+        14,
+        120
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "axis",
+      "hp": 320,
+      "name": "west perimeter wall of the Axis camp"
+    },
+    {
+      "id": "axis_west_down",
+      "rect": [
+        5730,
+        400,
+        14,
+        120
+      ],
+      "color": [
+        150,
+        134,
+        98
+      ],
+      "solid": true,
+      "style": "wall",
+      "height": 26,
+      "owner": "axis",
+      "hp": 320,
+      "name": "west perimeter wall of the Axis camp"
+    },
+    {
+      "id": "gate_right",
+      "rect": [
+        5730,
+        320,
+        14,
+        80
+      ],
+      "color": [
+        92,
+        84,
+        70
+      ],
+      "solid": true,
+      "style": "gate",
+      "height": 26,
+      "owner": "axis",
+      "hp": 160,
+      "name": "east checkpoint of the Axis camp"
+    },
+    {
+      "id": "axis_tower_nw",
+      "rect": [
+        5946,
+        188,
+        36,
+        36
+      ],
+      "color": [
+        112,
+        106,
+        86
+      ],
+      "solid": true,
+      "style": "tower",
+      "height": 60,
+      "owner": "axis",
+      "hp": 300,
+      "name": "north-west watchtower of the Axis camp"
+    },
+    {
+      "id": "axis_tower_sw",
+      "rect": [
+        5946,
+        496,
+        36,
+        36
+      ],
+      "color": [
+        112,
+        106,
+        86
+      ],
+      "solid": true,
+      "style": "tower",
+      "height": 60,
+      "owner": "axis",
+      "hp": 300,
+      "name": "south-west watchtower of the Axis camp"
+    },
+    {
+      "id": "axis_tower_ne",
+      "rect": [
+        5710,
+        188,
+        36,
+        36
+      ],
+      "color": [
+        112,
+        106,
+        86
+      ],
+      "solid": true,
+      "style": "tower",
+      "height": 60,
+      "owner": "axis",
+      "hp": 300,
+      "name": "north-east watchtower of the Axis camp"
+    },
+    {
+      "id": "axis_tower_se",
+      "rect": [
+        5710,
+        496,
+        36,
+        36
+      ],
+      "color": [
+        112,
+        106,
+        86
+      ],
+      "solid": true,
+      "style": "tower",
+      "height": 60,
+      "owner": "axis",
+      "hp": 300,
+      "name": "south-east watchtower of the Axis camp"
+    },
+    {
+      "id": "axis_keep",
+      "rect": [
+        5820,
+        300,
+        70,
+        120
+      ],
+      "color": [
+        98,
+        102,
+        90
+      ],
+      "solid": false,
+      "style": "keep",
+      "height": 44,
+      "owner": "axis"
+    },
+    {
+      "id": "axis_palisade_n",
+      "rect": [
+        5660,
+        250,
+        10,
+        60
+      ],
+      "color": [
+        74,
+        76,
+        80
+      ],
+      "solid": true,
+      "style": "palisade",
+      "height": 16,
+      "owner": "axis",
+      "hp": 90,
+      "name": "tank traps of the Axis camp"
+    },
+    {
+      "id": "axis_palisade_s",
+      "rect": [
+        5660,
+        410,
+        10,
+        60
+      ],
+      "color": [
+        74,
+        76,
+        80
+      ],
+      "solid": true,
+      "style": "palisade",
+      "height": 16,
+      "owner": "axis",
+      "hp": 90,
+      "name": "tank traps of the Axis camp"
+    },
+    {
+      "id": "spikes_ally",
+      "rect": [
+        350,
+        280,
+        46,
+        150
+      ],
+      "color": [
+        70,
+        70,
+        76
+      ],
+      "solid": false,
+      "style": "spikes"
+    },
+    {
+      "id": "spikes_axis",
+      "rect": [
+        5604,
+        280,
+        46,
+        150
+      ],
+      "color": [
+        70,
+        70,
+        76
+      ],
+      "solid": false,
+      "style": "spikes"
+    },
+    {
+      "id": "trench_w_main",
+      "rect": [
+        1500,
+        220,
+        14,
+        290
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_w_a",
+      "rect": [
+        1380,
+        262,
+        60,
+        12
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_w_b",
+      "rect": [
+        1380,
+        440,
+        60,
+        12
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_e_main",
+      "rect": [
+        4472,
+        220,
+        14,
+        290
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_e_a",
+      "rect": [
+        4500,
+        262,
+        60,
+        12
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_e_b",
+      "rect": [
+        4500,
+        440,
+        60,
+        12
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_mid_0",
+      "rect": [
+        2700,
+        300,
+        300,
+        12
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_mid_1",
+      "rect": [
+        2700,
+        400,
+        300,
+        12
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_mid_2",
+      "rect": [
+        2800,
+        200,
+        200,
+        12
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_mid_3",
+      "rect": [
+        2800,
+        520,
+        200,
+        12
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_mid_4",
+      "rect": [
+        2700,
+        300,
+        12,
+        112
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "trench_mid_5",
+      "rect": [
+        3276,
+        300,
+        12,
+        112
+      ],
+      "color": [
+        74,
+        56,
+        38
+      ],
+      "solid": false,
+      "style": "trench"
+    },
+    {
+      "id": "spikes_mid_0",
+      "rect": [
+        2280,
+        250,
+        50,
+        40
+      ],
+      "color": [
+        70,
+        70,
+        76
+      ],
+      "solid": false,
+      "style": "spikes"
+    },
+    {
+      "id": "spikes_mid_1",
+      "rect": [
+        3670,
+        440,
+        50,
+        40
+      ],
+      "color": [
+        70,
+        70,
+        76
+      ],
+      "solid": false,
+      "style": "spikes"
+    },
+    {
+      "id": "spikes_mid_2",
+      "rect": [
+        2960,
+        330,
+        40,
+        60
+      ],
+      "color": [
+        70,
+        70,
+        76
+      ],
+      "solid": false,
+      "style": "spikes"
+    },
+    {
+      "id": "spikes_mid_3",
+      "rect": [
+        1900,
+        460,
+        46,
+        36
+      ],
+      "color": [
+        70,
+        70,
+        76
+      ],
+      "solid": false,
+      "style": "spikes"
+    },
+    {
+      "id": "spikes_mid_4",
+      "rect": [
+        4000,
+        220,
+        46,
+        36
+      ],
+      "color": [
+        70,
+        70,
+        76
+      ],
+      "solid": false,
+      "style": "spikes"
+    },
+    {
+      "id": "mines_ally",
+      "rect": [
+        430,
+        240,
+        80,
+        240
+      ],
+      "color": [
+        96,
+        78,
+        54
+      ],
+      "solid": false,
+      "style": "mines",
+      "owner": "allies"
+    },
+    {
+      "id": "wire_ally",
+      "rect": [
+        402,
+        226,
+        24,
+        270
+      ],
+      "color": [
+        80,
+        70,
+        56
+      ],
+      "solid": false,
+      "style": "wire",
+      "owner": "allies",
+      "hp": 70
+    },
+    {
+      "id": "ally_hedgehogs_n",
+      "rect": [
+        540,
+        250,
+        10,
+        110
+      ],
+      "color": [
+        90,
+        90,
+        96
+      ],
+      "solid": true,
+      "style": "palisade",
+      "owner": "allies",
+      "hidden": true,
+      "hp": 110,
+      "height": 14
+    },
+    {
+      "id": "ally_hedgehogs_s",
+      "rect": [
+        540,
+        380,
+        10,
+        110
+      ],
+      "color": [
+        90,
+        90,
+        96
+      ],
+      "solid": true,
+      "style": "palisade",
+      "owner": "allies",
+      "hidden": true,
+      "hp": 110,
+      "height": 14
+    },
+    {
+      "id": "ally_foxholes_a",
+      "rect": [
+        480,
+        296,
+        46,
+        12
+      ],
+      "color": [
+        60,
+        46,
+        32
+      ],
+      "solid": false,
+      "style": "trench",
+      "hidden": true
+    },
+    {
+      "id": "ally_foxholes_b",
+      "rect": [
+        480,
+        430,
+        46,
+        12
+      ],
+      "color": [
+        60,
+        46,
+        32
+      ],
+      "solid": false,
+      "style": "trench",
+      "hidden": true
+    },
+    {
+      "id": "mines_axis",
+      "rect": [
+        5490,
+        240,
+        80,
+        240
+      ],
+      "color": [
+        96,
+        78,
+        54
+      ],
+      "solid": false,
+      "style": "mines",
+      "owner": "axis"
+    },
+    {
+      "id": "wire_axis",
+      "rect": [
+        5574,
+        226,
+        24,
+        270
+      ],
+      "color": [
+        80,
+        70,
+        56
+      ],
+      "solid": false,
+      "style": "wire",
+      "owner": "axis",
+      "hp": 70
+    },
+    {
+      "id": "axis_hedgehogs_n",
+      "rect": [
+        5450,
+        250,
+        10,
+        110
+      ],
+      "color": [
+        90,
+        90,
+        96
+      ],
+      "solid": true,
+      "style": "palisade",
+      "owner": "axis",
+      "hidden": true,
+      "hp": 110,
+      "height": 14
+    },
+    {
+      "id": "axis_hedgehogs_s",
+      "rect": [
+        5450,
+        380,
+        10,
+        110
+      ],
+      "color": [
+        90,
+        90,
+        96
+      ],
+      "solid": true,
+      "style": "palisade",
+      "owner": "axis",
+      "hidden": true,
+      "hp": 110,
+      "height": 14
+    },
+    {
+      "id": "axis_foxholes_a",
+      "rect": [
+        5474,
+        296,
+        46,
+        12
+      ],
+      "color": [
+        60,
+        46,
+        32
+      ],
+      "solid": false,
+      "style": "trench",
+      "hidden": true
+    },
+    {
+      "id": "axis_foxholes_b",
+      "rect": [
+        5474,
+        430,
+        46,
+        12
+      ],
+      "color": [
+        60,
+        46,
+        32
+      ],
+      "solid": false,
+      "style": "trench",
+      "hidden": true
+    },
+    {
+      "id": "mines_mid_a",
+      "rect": [
+        2280,
+        450,
+        100,
+        90
+      ],
+      "color": [
+        96,
+        78,
+        54
+      ],
+      "solid": false,
+      "style": "mines"
+    },
+    {
+      "id": "mines_mid_b",
+      "rect": [
+        3620,
+        190,
+        100,
+        90
+      ],
+      "color": [
+        96,
+        78,
+        54
+      ],
+      "solid": false,
+      "style": "mines"
+    },
+    {
+      "id": "wire_mid_a",
+      "rect": [
+        2400,
+        360,
+        70,
+        36
+      ],
+      "color": [
+        80,
+        70,
+        56
+      ],
+      "solid": false,
+      "style": "wire",
+      "hp": 60
+    },
+    {
+      "id": "wire_mid_b",
+      "rect": [
+        3460,
+        300,
+        70,
+        36
+      ],
+      "color": [
+        80,
+        70,
+        56
+      ],
+      "solid": false,
+      "style": "wire",
+      "hp": 60
+    },
+    {
+      "id": "hill_a",
+      "rect": [
+        760,
+        130,
+        300,
+        120
+      ],
+      "color": [
+        104,
+        150,
+        74
+      ],
+      "solid": false,
+      "style": "hill",
+      "height": 48
+    },
+    {
+      "id": "hill_b",
+      "rect": [
+        1900,
+        440,
+        240,
+        110
+      ],
+      "color": [
+        104,
+        150,
+        74
+      ],
+      "solid": false,
+      "style": "hill",
+      "height": 48
+    },
+    {
+      "id": "hill_c",
+      "rect": [
+        2420,
+        465,
+        210,
+        100
+      ],
+      "color": [
+        104,
+        150,
+        74
+      ],
+      "solid": false,
+      "style": "hill",
+      "height": 48
+    },
+    {
+      "id": "hill_d",
+      "rect": [
+        3370,
+        465,
+        210,
+        100
+      ],
+      "color": [
+        104,
+        150,
+        74
+      ],
+      "solid": false,
+      "style": "hill",
+      "height": 48
+    },
+    {
+      "id": "hill_e",
+      "rect": [
+        3860,
+        440,
+        240,
+        110
+      ],
+      "color": [
+        104,
+        150,
+        74
+      ],
+      "solid": false,
+      "style": "hill",
+      "height": 48
+    },
+    {
+      "id": "hill_f",
+      "rect": [
+        4940,
+        130,
+        300,
+        120
+      ],
+      "color": [
+        104,
+        150,
+        74
+      ],
+      "solid": false,
+      "style": "hill",
+      "height": 48
+    },
+    {
+      "id": "hill_g",
+      "rect": [
+        2820,
+        80,
+        360,
+        90
+      ],
+      "color": [
+        104,
+        150,
+        74
+      ],
+      "solid": false,
+      "style": "hill",
+      "height": 48
+    },
+    {
+      "id": "ashford_house_0",
+      "rect": [
+        1250,
+        232,
+        38,
+        22
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_1",
+      "rect": [
+        1312,
+        235,
+        34,
+        24
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_2",
+      "rect": [
+        1374,
+        235,
+        30,
+        20
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        170,
+        90,
+        60
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_3",
+      "rect": [
+        1560,
+        228,
+        38,
+        24
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        170,
+        90,
+        60
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_4",
+      "rect": [
+        1622,
+        228,
+        30,
+        20
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        136,
+        100,
+        70
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_5",
+      "rect": [
+        1250,
+        275,
+        38,
+        20
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_6",
+      "rect": [
+        1312,
+        272,
+        38,
+        20
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        136,
+        100,
+        70
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_7",
+      "rect": [
+        1560,
+        275,
+        34,
+        20
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_8",
+      "rect": [
+        1622,
+        268,
+        30,
+        22
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        136,
+        100,
+        70
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_9",
+      "rect": [
+        1250,
+        404,
+        30,
+        24
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_10",
+      "rect": [
+        1374,
+        408,
+        34,
+        24
+      ],
+      "color": [
+        222,
+        208,
+        176
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_11",
+      "rect": [
+        1436,
+        408,
+        30,
+        24
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_12",
+      "rect": [
+        1498,
+        404,
+        30,
+        22
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_13",
+      "rect": [
+        1560,
+        408,
+        30,
+        20
+      ],
+      "color": [
+        222,
+        208,
+        176
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_14",
+      "rect": [
+        1622,
+        411,
+        30,
+        22
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_15",
+      "rect": [
+        1250,
+        448,
+        34,
+        20
+      ],
+      "color": [
+        222,
+        208,
+        176
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_16",
+      "rect": [
+        1312,
+        444,
+        38,
+        22
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_17",
+      "rect": [
+        1374,
+        451,
+        38,
+        24
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_18",
+      "rect": [
+        1498,
+        451,
+        34,
+        20
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_19",
+      "rect": [
+        1560,
+        444,
+        30,
+        20
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "ashford_house_20",
+      "rect": [
+        1622,
+        448,
+        34,
+        24
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        170,
+        90,
+        60
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Ashford"
+    },
+    {
+      "id": "brandt_house_0",
+      "rect": [
+        4380,
+        232,
+        38,
+        20
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_1",
+      "rect": [
+        4442,
+        228,
+        30,
+        24
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_2",
+      "rect": [
+        4504,
+        235,
+        38,
+        20
+      ],
+      "color": [
+        222,
+        208,
+        176
+      ],
+      "roof": [
+        136,
+        100,
+        70
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_3",
+      "rect": [
+        4566,
+        228,
+        34,
+        20
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_4",
+      "rect": [
+        4628,
+        235,
+        34,
+        20
+      ],
+      "color": [
+        222,
+        208,
+        176
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_5",
+      "rect": [
+        4690,
+        232,
+        38,
+        22
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_6",
+      "rect": [
+        4752,
+        235,
+        34,
+        24
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_7",
+      "rect": [
+        4380,
+        268,
+        30,
+        24
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_8",
+      "rect": [
+        4442,
+        268,
+        30,
+        20
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_9",
+      "rect": [
+        4504,
+        268,
+        38,
+        20
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_10",
+      "rect": [
+        4690,
+        275,
+        38,
+        24
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        170,
+        90,
+        60
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_11",
+      "rect": [
+        4752,
+        272,
+        30,
+        22
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_12",
+      "rect": [
+        4380,
+        408,
+        38,
+        20
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_13",
+      "rect": [
+        4442,
+        408,
+        30,
+        20
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_14",
+      "rect": [
+        4566,
+        408,
+        38,
+        20
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        150,
+        70,
+        56
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_15",
+      "rect": [
+        4628,
+        404,
+        30,
+        22
+      ],
+      "color": [
+        222,
+        208,
+        176
+      ],
+      "roof": [
+        170,
+        90,
+        60
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_16",
+      "rect": [
+        4690,
+        408,
+        38,
+        22
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        170,
+        90,
+        60
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_17",
+      "rect": [
+        4752,
+        404,
+        30,
+        24
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        136,
+        100,
+        70
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_18",
+      "rect": [
+        4380,
+        451,
+        34,
+        24
+      ],
+      "color": [
+        222,
+        208,
+        176
+      ],
+      "roof": [
+        136,
+        100,
+        70
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_19",
+      "rect": [
+        4442,
+        451,
+        38,
+        20
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_20",
+      "rect": [
+        4504,
+        444,
+        34,
+        20
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        136,
+        100,
+        70
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_21",
+      "rect": [
+        4566,
+        448,
+        38,
+        22
+      ],
+      "color": [
+        214,
+        198,
+        160
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_22",
+      "rect": [
+        4628,
+        444,
+        38,
+        24
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        96,
+        98,
+        104
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_23",
+      "rect": [
+        4690,
+        444,
+        34,
+        22
+      ],
+      "color": [
+        184,
+        170,
+        144
+      ],
+      "roof": [
+        136,
+        100,
+        70
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    },
+    {
+      "id": "brandt_house_24",
+      "rect": [
+        4752,
+        448,
+        30,
+        24
+      ],
+      "color": [
+        196,
+        182,
+        150
+      ],
+      "roof": [
+        120,
+        64,
+        52
+      ],
+      "solid": true,
+      "style": "house",
+      "height": 24,
+      "hp": 140,
+      "name": "a house in Brandt"
+    }
+  ],
+  "craters": [
+    [
+      2862,
+      379,
+      16
+    ],
+    [
+      1738,
+      381,
+      17
+    ],
+    [
+      4172,
+      160,
+      12
+    ],
+    [
+      1362,
+      539,
+      18
+    ],
+    [
+      1168,
+      631,
+      22
+    ],
+    [
+      3616,
+      436,
+      10
+    ],
+    [
+      1060,
+      390,
+      9
+    ],
+    [
+      1760,
+      238,
+      8
+    ],
+    [
+      2856,
+      343,
+      20
+    ],
+    [
+      3076,
+      449,
+      15
+    ],
+    [
+      3650,
+      352,
+      12
+    ],
+    [
+      4990,
+      638,
+      20
+    ],
+    [
+      3720,
+      277,
+      11
+    ],
+    [
+      2280,
+      147,
+      19
+    ],
+    [
+      2602,
+      559,
+      13
+    ],
+    [
+      4832,
+      559,
+      8
+    ],
+    [
+      1838,
+      592,
+      15
+    ],
+    [
+      4922,
+      321,
+      9
+    ],
+    [
+      3518,
+      523,
+      12
+    ],
+    [
+      4032,
+      173,
+      11
+    ],
+    [
+      1404,
+      142,
+      19
+    ],
+    [
+      1710,
+      406,
+      14
+    ],
+    [
+      1762,
+      498,
+      10
+    ],
+    [
+      3574,
+      172,
+      14
+    ],
+    [
+      1852,
+      253,
+      22
+    ],
+    [
+      4214,
+      271,
+      20
+    ],
+    [
+      1842,
+      319,
+      20
+    ],
+    [
+      3568,
+      163,
+      22
+    ],
+    [
+      1852,
+      247,
+      19
+    ],
+    [
+      1360,
+      419,
+      11
+    ],
+    [
+      3406,
+      307,
+      14
+    ],
+    [
+      4836,
+      366,
+      16
+    ],
+    [
+      4466,
+      207,
+      10
+    ],
+    [
+      4634,
+      543,
+      11
+    ],
+    [
+      1760,
+      502,
+      21
+    ],
+    [
+      1786,
+      614,
+      20
+    ],
+    [
+      3414,
+      333,
+      9
+    ],
+    [
+      1154,
+      620,
+      11
+    ],
+    [
+      3720,
+      246,
+      20
+    ],
+    [
+      3386,
+      266,
+      10
+    ],
+    [
+      3882,
+      146,
+      11
+    ],
+    [
+      3238,
+      562,
+      17
+    ],
+    [
+      2120,
+      596,
+      11
+    ],
+    [
+      1066,
+      253,
+      14
+    ],
+    [
+      1242,
+      203,
+      13
+    ],
+    [
+      3288,
+      180,
+      13
+    ],
+    [
+      4564,
+      630,
+      17
+    ],
+    [
+      3720,
+      420,
+      10
+    ]
+  ],
+  "groups": [
+    {
+      "side": "allies",
+      "unit_type": "flak_gun",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "dive_bomber",
+      "count": 3,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "fighter",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "flak_gun",
+      "count": 2,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "dive_bomber",
+      "count": 3,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "fighter",
+      "count": 2,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "gen_edric",
+      "count": 1,
+      "area": [
+        138,
+        352,
+        14,
+        14
+      ],
+      "name": "General Edric"
+    },
+    {
+      "side": "axis",
+      "unit_type": "marshal_varok",
+      "count": 1,
+      "area": [
+        5848,
+        352,
+        14,
+        14
+      ],
+      "name": "Marshal Varok"
+    },
+    {
+      "side": "allies",
+      "unit_type": "sgt_hale",
+      "count": 1,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ],
+      "name": "Sgt. Hale"
+    },
+    {
+      "side": "allies",
+      "unit_type": "col_rhodes",
+      "count": 1,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ],
+      "name": "Col. Rhodes"
+    },
+    {
+      "side": "allies",
+      "unit_type": "cpl_wren",
+      "count": 1,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ],
+      "name": "Cpl. Wren"
+    },
+    {
+      "side": "allies",
+      "unit_type": "medic_ambrose",
+      "count": 1,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ],
+      "name": "Medic Ambrose"
+    },
+    {
+      "side": "axis",
+      "unit_type": "hptm_gorm",
+      "count": 1,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ],
+      "name": "Hptm. Gorm"
+    },
+    {
+      "side": "axis",
+      "unit_type": "gen_kael",
+      "count": 1,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ],
+      "name": "Gen. Kael"
+    },
+    {
+      "side": "axis",
+      "unit_type": "jager_sable",
+      "count": 1,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ],
+      "name": "Jager Sable"
+    },
+    {
+      "side": "axis",
+      "unit_type": "dr_morwen",
+      "count": 1,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ],
+      "name": "Dr. Morwen"
+    },
+    {
+      "side": "allies",
+      "unit_type": "rifleman",
+      "count": 30,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "machine_gunner",
+      "count": 14,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "scout_car",
+      "count": 6,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "flamethrower",
+      "count": 4,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "sentry",
+      "count": 3,
+      "area": [
+        18,
+        188,
+        36,
+        36
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "sentry",
+      "count": 3,
+      "area": [
+        18,
+        496,
+        36,
+        36
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "sentry",
+      "count": 3,
+      "area": [
+        254,
+        188,
+        36,
+        36
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "sentry",
+      "count": 3,
+      "area": [
+        254,
+        496,
+        36,
+        36
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "sentry",
+      "count": 8,
+      "area": [
+        30,
+        200,
+        240,
+        14
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "sentry",
+      "count": 8,
+      "area": [
+        30,
+        506,
+        240,
+        14
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "rifleman",
+      "count": 30,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "machine_gunner",
+      "count": 14,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "scout_car",
+      "count": 6,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "flamethrower",
+      "count": 4,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "sentry",
+      "count": 3,
+      "area": [
+        5946,
+        188,
+        36,
+        36
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "sentry",
+      "count": 3,
+      "area": [
+        5946,
+        496,
+        36,
+        36
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "sentry",
+      "count": 3,
+      "area": [
+        5710,
+        188,
+        36,
+        36
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "sentry",
+      "count": 3,
+      "area": [
+        5710,
+        496,
+        36,
+        36
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "sentry",
+      "count": 8,
+      "area": [
+        5730,
+        200,
+        240,
+        14
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "sentry",
+      "count": 8,
+      "area": [
+        5730,
+        506,
+        240,
+        14
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "sniper",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "bazooka",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "assault_trooper",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "at_rifle",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "war_dog",
+      "count": 3,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "tank",
+      "count": 1,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "sniper",
+      "count": 2,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "bazooka",
+      "count": 2,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "assault_trooper",
+      "count": 2,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "at_rifle",
+      "count": 2,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "war_dog",
+      "count": 3,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "tank",
+      "count": 1,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "torpedo_boat",
+      "count": 2,
+      "area": [
+        60,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "gunboat",
+      "count": 1,
+      "area": [
+        60,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "cruiser",
+      "count": 1,
+      "area": [
+        60,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "carrier",
+      "count": 1,
+      "area": [
+        60,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "landing_craft",
+      "count": 1,
+      "area": [
+        60,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "torpedo_boat",
+      "count": 2,
+      "area": [
+        5620,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "gunboat",
+      "count": 1,
+      "area": [
+        5620,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "cruiser",
+      "count": 1,
+      "area": [
+        5620,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "dreadnought",
+      "count": 1,
+      "area": [
+        5620,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "landing_craft",
+      "count": 1,
+      "area": [
+        5620,
+        700,
+        320,
+        150
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "halftrack",
+      "count": 1,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "halftrack",
+      "count": 1,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "engineer",
+      "count": 3,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "medic",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "commando",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "armored_car",
+      "count": 1,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "engineer",
+      "count": 3,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "medic",
+      "count": 2,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "commando",
+      "count": 2,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "armored_car",
+      "count": 1,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "mortar",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "mlrs_pod",
+      "count": 2,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "allies",
+      "unit_type": "tank_destroyer",
+      "count": 1,
+      "area": [
+        50,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "mortar",
+      "count": 2,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "v2_launcher",
+      "count": 1,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    },
+    {
+      "side": "axis",
+      "unit_type": "tank_destroyer",
+      "count": 1,
+      "area": [
+        5800,
+        220,
+        150,
+        270
+      ]
+    }
+  ],
+  "objectives": [
+    {
+      "id": "take_axis_hq",
+      "side": "allies",
+      "text": "Allied Forces: take the Axis headquarters",
+      "when": {
+        "type": "side_reaches",
+        "side": "allies",
+        "area": [
+          5820,
+          300,
+          70,
+          120
+        ]
+      }
+    },
+    {
+      "id": "take_allied_hq",
+      "side": "axis",
+      "text": "Axis Forces: take the Allied headquarters",
+      "when": {
+        "type": "side_reaches",
+        "side": "axis",
+        "area": [
+          110,
+          300,
+          70,
+          120
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "fortify_ally_1",
+      "trigger": {
+        "type": "time",
+        "at": 75
+      },
+      "actions": [
+        {
+          "type": "show_terrain",
+          "id": "ally_hedgehogs_n"
+        },
+        {
+          "type": "show_terrain",
+          "id": "ally_hedgehogs_s"
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "hmg_nest",
+          "count": 2,
+          "area": [
+            440,
+            250,
+            80,
+            240
+          ]
+        },
+        {
+          "type": "message",
+          "text": "Allied engineers throw up tank traps and machine-gun nests."
+        }
+      ]
+    },
+    {
+      "id": "fortify_ally_2",
+      "trigger": {
+        "type": "time",
+        "at": 200
+      },
+      "actions": [
+        {
+          "type": "show_terrain",
+          "id": "ally_foxholes_a"
+        },
+        {
+          "type": "show_terrain",
+          "id": "ally_foxholes_b"
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "hmg_nest",
+          "count": 2,
+          "area": [
+            440,
+            250,
+            80,
+            240
+          ]
+        },
+        {
+          "type": "message",
+          "text": "The Allied camp digs foxholes and more gun nests."
+        }
+      ]
+    },
+    {
+      "id": "fortify_axis_1",
+      "trigger": {
+        "type": "time",
+        "at": 75
+      },
+      "actions": [
+        {
+          "type": "show_terrain",
+          "id": "axis_hedgehogs_n"
+        },
+        {
+          "type": "show_terrain",
+          "id": "axis_hedgehogs_s"
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "hmg_nest",
+          "count": 2,
+          "area": [
+            5480,
+            250,
+            80,
+            240
+          ]
+        },
+        {
+          "type": "message",
+          "text": "Axis engineers throw up tank traps and machine-gun nests."
+        }
+      ]
+    },
+    {
+      "id": "fortify_axis_2",
+      "trigger": {
+        "type": "time",
+        "at": 200
+      },
+      "actions": [
+        {
+          "type": "show_terrain",
+          "id": "axis_foxholes_a"
+        },
+        {
+          "type": "show_terrain",
+          "id": "axis_foxholes_b"
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "hmg_nest",
+          "count": 2,
+          "area": [
+            5480,
+            250,
+            80,
+            240
+          ]
+        },
+        {
+          "type": "message",
+          "text": "The Axis camp digs foxholes and more gun nests."
+        }
+      ]
+    },
+    {
+      "id": "supply_run",
+      "repeat": true,
+      "cooldown": 75,
+      "trigger": {
+        "type": "time",
+        "at": 50
+      },
+      "actions": [
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "supply_plane",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "supply_plane",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paradrop",
+      "repeat": true,
+      "cooldown": 130,
+      "trigger": {
+        "type": "time",
+        "at": 110
+      },
+      "actions": [
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "para_plane",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "para_plane",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bomber_raid",
+      "repeat": true,
+      "cooldown": 100,
+      "trigger": {
+        "type": "time",
+        "at": 90
+      },
+      "actions": [
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "heavy_bomber",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "heavy_bomber",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sea_wave",
+      "repeat": true,
+      "cooldown": 55,
+      "trigger": {
+        "type": "time",
+        "at": 40
+      },
+      "actions": [
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "torpedo_boat",
+          "count": 1,
+          "area": [
+            60,
+            700,
+            320,
+            150
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "gunboat",
+          "count": 1,
+          "area": [
+            60,
+            700,
+            320,
+            150
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "landing_craft",
+          "count": 1,
+          "area": [
+            60,
+            700,
+            320,
+            150
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "torpedo_boat",
+          "count": 1,
+          "area": [
+            5620,
+            700,
+            320,
+            150
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "gunboat",
+          "count": 1,
+          "area": [
+            5620,
+            700,
+            320,
+            150
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "landing_craft",
+          "count": 1,
+          "area": [
+            5620,
+            700,
+            320,
+            150
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "destroyer",
+          "count": 1,
+          "area": [
+            60,
+            700,
+            320,
+            150
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "submarine",
+          "count": 1,
+          "area": [
+            60,
+            700,
+            320,
+            150
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "destroyer",
+          "count": 1,
+          "area": [
+            5620,
+            700,
+            320,
+            150
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "submarine",
+          "count": 1,
+          "area": [
+            5620,
+            700,
+            320,
+            150
+          ]
+        }
+      ]
+    },
+    {
+      "id": "air_wave",
+      "repeat": true,
+      "cooldown": 40,
+      "trigger": {
+        "type": "time",
+        "at": 30
+      },
+      "actions": [
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "dive_bomber",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "fighter",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "dive_bomber",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "fighter",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "heavy_fighter",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "strafer",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "heavy_fighter",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "strafer",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muster",
+      "repeat": true,
+      "cooldown": 20,
+      "trigger": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "time",
+            "at": 0
+          },
+          {
+            "type": "side_below",
+            "side": "allies",
+            "count": 190
+          },
+          {
+            "type": "side_below",
+            "side": "axis",
+            "count": 190
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "rifleman",
+          "count": 6,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "machine_gunner",
+          "count": 3,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "flamethrower",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "scout_car",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "sniper",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "bazooka",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "assault_trooper",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "war_dog",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "at_rifle",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "rifleman",
+          "count": 6,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "machine_gunner",
+          "count": 3,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "flamethrower",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "scout_car",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "sniper",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "bazooka",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "assault_trooper",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "war_dog",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "at_rifle",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "engineer",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "medic",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "commando",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "flame_squad",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "armored_car",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "engineer",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "medic",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "commando",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "flame_squad",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "armored_car",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "siege_wave",
+      "repeat": true,
+      "cooldown": 5,
+      "trigger": {
+        "type": "wave",
+        "event": "wave_clock",
+        "every": 4
+      },
+      "actions": [
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "field_gun",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "howitzer",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "mortar",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "flak_gun",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "tank",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "field_gun",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "howitzer",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "mortar",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "flak_gun",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "tank",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "halftrack",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "halftrack",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "message",
+          "text": "Armour and heavy guns roll up behind the fifth wave."
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "tank_destroyer",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "tank_destroyer",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "siege_catapults",
+      "repeat": true,
+      "cooldown": 45,
+      "trigger": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "time",
+            "at": 40
+          },
+          {
+            "type": "side_below",
+            "side": "allies",
+            "count": 190
+          },
+          {
+            "type": "side_below",
+            "side": "axis",
+            "count": 190
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "mortar",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "mortar",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "flak_gun",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "flak_gun",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "field_gun",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "field_gun",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "message",
+          "text": "Both camps bring up a field gun."
+        }
+      ]
+    },
+    {
+      "id": "siege_trebuchets",
+      "repeat": true,
+      "cooldown": 90,
+      "trigger": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "time",
+            "at": 150
+          },
+          {
+            "type": "side_below",
+            "side": "allies",
+            "count": 190
+          },
+          {
+            "type": "side_below",
+            "side": "axis",
+            "count": 190
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "howitzer",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "howitzer",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "message",
+          "text": "Both camps haul a howitzer into position."
+        }
+      ]
+    },
+    {
+      "id": "open_left_gate",
+      "repeat": true,
+      "cooldown": 10,
+      "trigger": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "units_in_area",
+            "side": "axis",
+            "area": [
+              270,
+              280,
+              140,
+              160
+            ],
+            "count": 6
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "terrain_hidden",
+              "id": "gate_left"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "hide_terrain",
+          "id": "gate_left"
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "machine_gunner",
+          "count": 4,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "rifleman",
+          "count": 3,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "flamethrower",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "scout_car",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "sniper",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "bazooka",
+          "count": 3,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "assault_trooper",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "war_dog",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "at_rifle",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "message",
+          "text": "The Allied camp counter-attacks through the west checkpoint!"
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "engineer",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "medic",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "commando",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "flame_squad",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "armored_car",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sally_left_gate",
+      "repeat": true,
+      "cooldown": 60,
+      "trigger": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "units_in_area",
+            "side": "allies",
+            "area": [
+              50,
+              220,
+              150,
+              270
+            ],
+            "count": 10
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "terrain_hidden",
+              "id": "gate_left"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "hide_terrain",
+          "id": "gate_left"
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "machine_gunner",
+          "count": 6,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "rifleman",
+          "count": 3,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "flamethrower",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "scout_car",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "sniper",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "bazooka",
+          "count": 3,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "assault_trooper",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "war_dog",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "at_rifle",
+          "count": 2,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "message",
+          "text": "The Allied garrison pours out of the west checkpoint, rifles ready."
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "engineer",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "medic",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "commando",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "flame_squad",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "allies",
+          "unit_type": "armored_car",
+          "count": 1,
+          "area": [
+            50,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "close_left_gate",
+      "repeat": true,
+      "cooldown": 5,
+      "trigger": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "terrain_hidden",
+            "id": "gate_left"
+          },
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "after",
+                "event": "open_left_gate",
+                "seconds": 20
+              },
+              {
+                "type": "after",
+                "event": "sally_left_gate",
+                "seconds": 20
+              }
+            ]
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "show_terrain",
+          "id": "gate_left"
+        },
+        {
+          "type": "message",
+          "text": "The Allied west checkpoint is sealed again."
+        }
+      ]
+    },
+    {
+      "id": "open_right_gate",
+      "repeat": true,
+      "cooldown": 10,
+      "trigger": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "units_in_area",
+            "side": "allies",
+            "area": [
+              5590,
+              280,
+              140,
+              160
+            ],
+            "count": 6
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "terrain_hidden",
+              "id": "gate_right"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "hide_terrain",
+          "id": "gate_right"
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "machine_gunner",
+          "count": 4,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "rifleman",
+          "count": 3,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "flamethrower",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "scout_car",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "sniper",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "bazooka",
+          "count": 3,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "assault_trooper",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "war_dog",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "at_rifle",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "message",
+          "text": "The Axis camp counter-attacks through the east checkpoint!"
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "engineer",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "medic",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "commando",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "flame_squad",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "armored_car",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sally_right_gate",
+      "repeat": true,
+      "cooldown": 60,
+      "trigger": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "units_in_area",
+            "side": "axis",
+            "area": [
+              5800,
+              220,
+              150,
+              270
+            ],
+            "count": 10
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "terrain_hidden",
+              "id": "gate_right"
+            }
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "hide_terrain",
+          "id": "gate_right"
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "machine_gunner",
+          "count": 6,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "rifleman",
+          "count": 3,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "flamethrower",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "scout_car",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "sniper",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "bazooka",
+          "count": 3,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "assault_trooper",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "war_dog",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "at_rifle",
+          "count": 2,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "message",
+          "text": "The Axis garrison pours out of the east checkpoint, rifles ready."
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "engineer",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "medic",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "commando",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "flame_squad",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        },
+        {
+          "type": "spawn",
+          "side": "axis",
+          "unit_type": "armored_car",
+          "count": 1,
+          "area": [
+            5800,
+            220,
+            150,
+            270
+          ]
+        }
+      ]
+    },
+    {
+      "id": "close_right_gate",
+      "repeat": true,
+      "cooldown": 5,
+      "trigger": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "terrain_hidden",
+            "id": "gate_right"
+          },
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "after",
+                "event": "open_right_gate",
+                "seconds": 20
+              },
+              {
+                "type": "after",
+                "event": "sally_right_gate",
+                "seconds": 20
+              }
+            ]
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "show_terrain",
+          "id": "gate_right"
+        },
+        {
+          "type": "message",
+          "text": "The Axis east checkpoint is sealed again."
+        }
+      ]
+    },
+    {
+      "id": "assault_axis_hq",
+      "trigger": {
+        "type": "any",
+        "conditions": [
+          {
+            "type": "units_in_area",
+            "side": "allies",
+            "area": [
+              2000,
+              240,
+              2000,
+              240
+            ],
+            "count": 25
+          },
+          {
+            "type": "time",
+            "at": 150
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "set_goal",
+          "side": "allies",
+          "point": [
+            5855,
+            360
+          ]
+        },
+        {
+          "type": "message",
+          "text": "The Allies push on the Axis headquarters!"
+        }
+      ]
+    },
+    {
+      "id": "assault_allied_hq",
+      "trigger": {
+        "type": "any",
+        "conditions": [
+          {
+            "type": "units_in_area",
+            "side": "axis",
+            "area": [
+              2000,
+              240,
+              2000,
+              240
+            ],
+            "count": 25
+          },
+          {
+            "type": "time",
+            "at": 150
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "set_goal",
+          "side": "axis",
+          "point": [
+            145,
+            360
+          ]
+        },
+        {
+          "type": "message",
+          "text": "The Axis push on the Allied headquarters!"
+        }
+      ]
+    },
+    {
+      "id": "missile_barrage",
+      "repeat": true,
+      "cooldown": 0,
+      "trigger": {
+        "type": "wave",
+        "event": "wave_clock",
+        "every": 3
+      },
+      "actions": [
+        {
+          "type": "barrage",
+          "side": "allies",
+          "style": "missiles",
+          "count": 16,
+          "area": [
+            2600,
+            230,
+            800,
+            250
+          ],
+          "radius": 30,
+          "damage": 55,
+          "text": "Allied rocket batteries open a missile barrage on the middle of the field!"
+        }
+      ]
+    },
+    {
+      "id": "v2_launch",
+      "repeat": true,
+      "cooldown": 0,
+      "trigger": {
+        "type": "wave",
+        "event": "wave_clock",
+        "every": 3
+      },
+      "actions": [
+        {
+          "type": "barrage",
+          "side": "axis",
+          "style": "v2",
+          "count": 1,
+          "area": [
+            2950,
+            300,
+            100,
+            100
+          ],
+          "radius": 28,
+          "damage": 420,
+          "text": "An Axis V-2 rises from the castle!"
+        }
+      ]
+    },
+    {
+      "id": "wave_clock",
+      "repeat": true,
+      "cooldown": 20,
+      "trigger": {
+        "type": "time",
+        "at": 20
+      },
+      "actions": []
+    }
+  ],
+  "weather": {
+    "start": "clear",
+    "cycle": [
+      60,
+      130
+    ]
+  },
+  "searchlights": [
+    {
+      "side": "allies",
+      "x": 340,
+      "y": 215
+    },
+    {
+      "side": "allies",
+      "x": 340,
+      "y": 505
+    },
+    {
+      "side": "axis",
+      "x": 5660,
+      "y": 215
+    },
+    {
+      "side": "axis",
+      "x": 5660,
+      "y": 505
+    }
+  ],
+  "rivers": [
+    {
+      "id": "west_river",
+      "name": "the Marne",
+      "x": 2200,
+      "width": 72,
+      "wobble": 12,
+      "seed": 3,
+      "bridges": [
+        {
+          "y": 360,
+          "len": 64,
+          "hp": 320,
+          "name": "the road bridge"
+        },
+        {
+          "y": 175,
+          "len": 52,
+          "hp": 200
+        },
+        {
+          "y": 545,
+          "len": 52,
+          "hp": 200
+        }
+      ]
+    },
+    {
+      "id": "east_river",
+      "name": "the Oder",
+      "x": 3800,
+      "width": 72,
+      "wobble": 12,
+      "seed": 8,
+      "bridges": [
+        {
+          "y": 360,
+          "len": 64,
+          "hp": 320,
+          "name": "the road bridge"
+        },
+        {
+          "y": 190,
+          "len": 52,
+          "hp": 200
+        },
+        {
+          "y": 530,
+          "len": 52,
+          "hp": 200
+        }
+      ]
+    }
+  ]
+}
